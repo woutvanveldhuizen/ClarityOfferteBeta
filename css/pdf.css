@@ -1,0 +1,145 @@
+#printRoot {
+  display: none;
+}
+
+@media print {
+  body > *:not(#printRoot) {
+    display: none !important;
+  }
+
+  #printRoot {
+    display: block !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #162329 !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  .pdfDoc {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #162329;
+    font-size: 10.5pt;
+  }
+
+  .pdfHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 14mm;
+    border-bottom: 2px solid #0b8f9c;
+    padding-bottom: 7mm;
+    margin-bottom: 8mm;
+  }
+
+  .pdfBrand {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+  }
+
+  .pdfBrand img {
+    width: 25mm;
+    height: 25mm;
+    object-fit: contain;
+  }
+
+  .pdfBrand h1 {
+    margin: 0 0 2mm;
+    font-size: 18pt;
+    color: #0b5962;
+  }
+
+  .pdfTextBlock {
+    white-space: pre-line;
+    line-height: 1.35;
+  }
+
+  .pdfMeta {
+    min-width: 48mm;
+    text-align: right;
+    line-height: 1.45;
+  }
+
+  .pdfMeta h2 {
+    margin: 0 0 3mm;
+    font-size: 20pt;
+    color: #0b8f9c;
+  }
+
+  .pdfTwoCols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12mm;
+    margin-bottom: 8mm;
+  }
+
+  .pdfBox h3 {
+    margin: 0 0 2mm;
+    font-size: 10pt;
+    color: #0b8f9c;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .pdfLines {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5mm;
+  }
+
+  .pdfLines th {
+    text-align: left;
+    font-size: 9pt;
+    color: #0b5962;
+    border-bottom: 1px solid #bad7dc;
+    padding: 2.2mm 1.5mm;
+  }
+
+  .pdfLines td {
+    border-bottom: 1px solid #e1ecef;
+    padding: 2mm 1.5mm;
+    vertical-align: top;
+  }
+
+  .pdfLines .money,
+  .pdfLines th.money {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .pdfTotals {
+    width: 75mm;
+    margin-left: auto;
+    margin-top: 7mm;
+    display: grid;
+    gap: 2mm;
+  }
+
+  .pdfTotals div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+  }
+
+  .pdfTotals .grand {
+    border-top: 2px solid #0b8f9c;
+    padding-top: 2.5mm;
+    font-size: 13pt;
+    font-weight: bold;
+  }
+
+  .pdfFooter {
+    margin-top: 12mm;
+    padding-top: 5mm;
+    border-top: 1px solid #d8e7ea;
+    color: #50656b;
+    font-size: 9pt;
+    line-height: 1.35;
+  }
+}

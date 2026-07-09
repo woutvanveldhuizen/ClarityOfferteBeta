@@ -1,0 +1,237 @@
+#printRoot {
+  display: none;
+}
+
+@media print {
+  body > *:not(#printRoot) {
+    display: none !important;
+  }
+
+  #printRoot {
+    display: block !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #162329 !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm 11mm;
+  }
+
+  .pdfDoc {
+    position: relative;
+    min-height: 277mm;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #17272d;
+    font-size: 9.4pt;
+    line-height: 1.28;
+  }
+
+  .pdfBackgroundMark {
+    position: absolute;
+    inset: -18mm -20mm auto auto;
+    width: 85mm;
+    height: 85mm;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(8, 158, 172, 0.12), rgba(8, 158, 172, 0));
+    z-index: 0;
+  }
+
+  .pdfHeaderV31 {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(62mm, 0.8fr);
+    gap: 10mm;
+    padding: 8mm 9mm 7mm;
+    margin-bottom: 7mm;
+    border-radius: 4mm;
+    color: #ffffff;
+    background:
+      linear-gradient(135deg, rgba(12, 71, 80, 0.98), rgba(0, 157, 174, 0.9)),
+      linear-gradient(45deg, rgba(255, 255, 255, 0.08) 0 25%, transparent 25% 50%, rgba(255, 255, 255, 0.08) 50% 75%, transparent 75%);
+    box-shadow: inset 0 -1.4mm 0 rgba(180, 243, 232, 0.42);
+  }
+
+  .pdfCompanyBlock {
+    display: grid;
+    grid-template-columns: 25mm 1fr;
+    gap: 6mm;
+    align-items: start;
+  }
+
+  .pdfCompanyBlock img {
+    width: 25mm;
+    height: 25mm;
+    object-fit: contain;
+    border-radius: 2mm;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .pdfCompanyBlock h1 {
+    margin: 0 0 2mm;
+    font-size: 20pt;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  .pdfTextBlock {
+    white-space: pre-line;
+  }
+
+  .pdfTextBlock.compact {
+    line-height: 1.28;
+    opacity: 0.96;
+  }
+
+  .pdfDocumentBlock {
+    text-align: right;
+  }
+
+  .pdfDocumentBlock h2 {
+    margin: 0 0 4mm;
+    font-size: 22pt;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .pdfMetaGrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: end;
+    column-gap: 3mm;
+    row-gap: 1mm;
+    margin-bottom: 5mm;
+  }
+
+  .pdfMetaGrid span {
+    opacity: 0.86;
+  }
+
+  .pdfCustomerTop {
+    display: inline-block;
+    min-width: 45mm;
+    padding-top: 4mm;
+    border-top: 0.35mm solid rgba(255, 255, 255, 0.35);
+    text-align: left;
+  }
+
+  .pdfCustomerTop h3 {
+    margin: 0 0 1.5mm;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #bdf8f2;
+  }
+
+  .pdfLines {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .pdfLinesV31 {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+  }
+
+  .pdfLines th {
+    text-align: left;
+    font-size: 8.4pt;
+    color: #086a74;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 0.55mm solid #0a929f;
+    padding: 1.7mm 2mm;
+  }
+
+  .pdfLines td {
+    border-bottom: 0.25mm solid #dfecef;
+    padding: 1.65mm 2mm;
+    vertical-align: top;
+  }
+
+  .pdfLines tbody tr:nth-child(even) td {
+    background: #f7fbfc;
+  }
+
+  .pdfLines .money,
+  .pdfLines th.money {
+    width: 34mm;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  .pdfBottomGrid {
+    display: grid;
+    grid-template-columns: 1fr 62mm;
+    gap: 10mm;
+    align-items: start;
+    margin-top: 7mm;
+  }
+
+  .pdfNoteBox {
+    min-height: 20mm;
+    padding-top: 4mm;
+    border-top: 0.25mm solid #d6e6e9;
+    color: #53676d;
+    font-size: 8.6pt;
+    line-height: 1.35;
+  }
+
+  .pdfNoteBox strong {
+    display: block;
+    color: #0b5962;
+    margin-bottom: 1mm;
+  }
+
+  .pdfNoteBox span {
+    display: block;
+  }
+
+  .pdfTotals {
+    display: grid;
+    gap: 1.5mm;
+  }
+
+  .pdfTotalsV31 {
+    padding: 4mm;
+    border: 0.25mm solid #cfe2e6;
+    border-radius: 3mm;
+    background: linear-gradient(180deg, #ffffff, #f4fbfb);
+  }
+
+  .pdfTotals div {
+    display: flex;
+    justify-content: space-between;
+    gap: 7mm;
+  }
+
+  .pdfTotals .grand {
+    margin-top: 1.5mm;
+    padding-top: 2.2mm;
+    border-top: 0.55mm solid #0a929f;
+    font-size: 13pt;
+    font-weight: 800;
+    color: #0a5660;
+  }
+
+  .pdfFooterV31 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 3mm;
+    border-top: 0.25mm solid #dce9ec;
+    color: #6d8086;
+    font-size: 7.8pt;
+    text-align: center;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071d22">
+  <title>Clarity Angebots- und Rechnungsapp</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/pdf.css">
+</head>
+<body>
+  <div id="splash" class="splash">
+    <img src="assets/logo.jpg" alt="Clarity logo">
+    <strong>Clarity</strong>
+    <span>v3.0dev1</span>
+  </div>
+
+  <div class="appShell">
+    <header class="appHeader">
+      <div class="brand">
+        <img src="assets/logo.jpg" alt="Clarity logo">
+        <div>
+          <strong id="appName">Clarity</strong>
+          <small id="appSubtitle">Angebote & Rechnungen</small>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Hoofdmenu">
+        <button class="active" data-page="document" data-i18n="document">Dokument</button>
+        <button data-page="customers" data-i18n="customers">Kunden</button>
+        <button data-page="archive" data-i18n="archive">Archiv</button>
+        <button data-page="settings" data-i18n="settings">Einstellungen</button>
+      </nav>
+    </header>
+
+    <main class="content">
+      <section id="document" class="page active">
+        <div class="pageTitleRow">
+          <div>
+            <h1 data-i18n="document">Dokument</h1>
+            <p data-i18n="documentIntro">Maak handmatig een offerte of factuur.</p>
+          </div>
+          <button id="resetDocument" class="ghost dangerText" data-i18n="reset">Reset</button>
+        </div>
+
+        <section class="card compactCard">
+          <div class="segmented" role="group" aria-label="Documenttype">
+            <button id="typeOffer" class="active" data-type="offer" data-i18n="offer">Angebot</button>
+            <button id="typeInvoice" data-type="invoice" data-i18n="invoice">Rechnung</button>
+          </div>
+
+          <div class="formGrid twoCols">
+            <label>
+              <span data-i18n="documentNumber">Nummer</span>
+              <input id="documentNumber" autocomplete="off">
+            </label>
+            <label>
+              <span data-i18n="documentDate">Datum</span>
+              <input id="documentDate" type="date">
+            </label>
+          </div>
+        </section>
+
+        <section class="card compactCard">
+          <div class="sectionHead">
+            <h2 data-i18n="customer">Kunde</h2>
+            <select id="customerSelect" aria-label="Klant kiezen"></select>
+          </div>
+
+          <div class="formGrid twoCols customerInline">
+            <label>
+              <span data-i18n="customerName">Name</span>
+              <input id="customerName" autocomplete="name">
+            </label>
+            <label>
+              <span data-i18n="customerEmail">E-Mail</span>
+              <input id="customerEmail" type="email" autocomplete="email">
+            </label>
+            <label>
+              <span data-i18n="customerPhone">Telefon</span>
+              <input id="customerPhone" type="tel" autocomplete="tel">
+            </label>
+            <label>
+              <span data-i18n="customerStreet">Straße und Hausnummer</span>
+              <input id="customerStreet" autocomplete="street-address">
+            </label>
+            <label class="wide">
+              <span data-i18n="customerCity">PLZ und Ort</span>
+              <input id="customerCity">
+            </label>
+          </div>
+        </section>
+
+        <section class="card compactCard">
+          <div class="sectionHead">
+            <h2 data-i18n="lines">Positionen</h2>
+            <button id="addLine" class="primary smallButton" data-i18n="addLine">+ Position</button>
+          </div>
+
+          <div id="lineList" class="lineList"></div>
+        </section>
+
+        <section class="card totalsCard">
+          <div class="totals">
+            <div>
+              <span data-i18n="subtotal">Zwischensumme netto</span>
+              <b id="subtotal">€ 0,00</b>
+            </div>
+            <div>
+              <span id="vatLabel">MwSt. 19%</span>
+              <b id="vat">€ 0,00</b>
+            </div>
+            <div class="grand">
+              <span data-i18n="total">Gesamt</span>
+              <b id="total">€ 0,00</b>
+            </div>
+          </div>
+
+          <div class="actionRow">
+            <button id="saveDocument" data-i18n="saveDocument">Speichern</button>
+            <button id="exportPdf" class="primary" data-i18n="exportPdf">PDF exportieren</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="customers" class="page">
+        <div class="pageTitleRow">
+          <div>
+            <h1 data-i18n="customers">Kunden</h1>
+            <p data-i18n="customersIntro">Beheer klanten voor offertes en facturen.</p>
+          </div>
+          <button id="newCustomer" class="primary smallButton" data-i18n="addCustomer">+ Kunde</button>
+        </div>
+
+        <section id="customerForm" class="card compactCard hidden">
+          <input id="customerEditId" type="hidden">
+          <div class="formGrid twoCols">
+            <label>
+              <span data-i18n="customerName">Name</span>
+              <input id="editCustomerName">
+            </label>
+            <label>
+              <span data-i18n="customerEmail">E-Mail</span>
+              <input id="editCustomerEmail" type="email">
+            </label>
+            <label>
+              <span data-i18n="customerPhone">Telefon</span>
+              <input id="editCustomerPhone" type="tel">
+            </label>
+            <label>
+              <span data-i18n="customerStreet">Straße und Hausnummer</span>
+              <input id="editCustomerStreet">
+            </label>
+            <label class="wide">
+              <span data-i18n="customerCity">PLZ und Ort</span>
+              <input id="editCustomerCity">
+            </label>
+          </div>
+          <div class="actionRow splitActions">
+            <div>
+              <button id="saveCustomer" class="primary" data-i18n="save">Speichern</button>
+              <button id="cancelCustomer" data-i18n="cancel">Abbrechen</button>
+            </div>
+            <button id="deleteCustomer" class="danger" data-i18n="delete">Löschen</button>
+          </div>
+        </section>
+
+        <section class="card compactCard">
+          <div id="customerList" class="customerList"></div>
+        </section>
+      </section>
+
+      <section id="archive" class="page">
+        <div class="pageTitleRow">
+          <div>
+            <h1 data-i18n="archive">Archiv</h1>
+            <p data-i18n="archiveIntro">Opgeslagen offertes en facturen.</p>
+          </div>
+        </div>
+        <section class="card compactCard">
+          <div id="archiveList" class="archiveList"></div>
+        </section>
+      </section>
+
+      <section id="settings" class="page">
+        <div class="pageTitleRow">
+          <div>
+            <h1 data-i18n="settings">Einstellungen</h1>
+            <p data-i18n="settingsIntro">Bedrijfsgegevens, btw en back-up.</p>
+          </div>
+        </div>
+
+        <section class="card settingsCard">
+          <details>
+            <summary data-i18n="preferences">Voreinstellungen</summary>
+            <label>
+              <span data-i18n="language">Sprache</span>
+              <select id="language">
+                <option value="de">Deutsch</option>
+                <option value="nl">Nederlands</option>
+                <option value="pl">Polski</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="theme">Darstellung</span>
+              <select id="theme">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
+            </label>
+          </details>
+
+          <details>
+            <summary data-i18n="company">Firma</summary>
+            <div class="formGrid twoCols">
+              <label>
+                <span data-i18n="companyName">Firmenname</span>
+                <input id="companyName">
+              </label>
+              <label>
+                <span data-i18n="owner">Inhaber</span>
+                <input id="companyOwner">
+              </label>
+              <label>
+                <span data-i18n="companyPhone">Telefon</span>
+                <input id="companyPhone">
+              </label>
+              <label>
+                <span data-i18n="companyEmail">E-Mail</span>
+                <input id="companyEmail">
+              </label>
+              <label>
+                <span data-i18n="companyWeb">Website</span>
+                <input id="companyWeb">
+              </label>
+              <label>
+                <span data-i18n="vatRate">MwSt. %</span>
+                <input id="vatRate" type="number" inputmode="decimal">
+              </label>
+              <label class="wide">
+                <span data-i18n="companyAddress">Adresse</span>
+                <textarea id="companyAddress"></textarea>
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary data-i18n="bank">Bankverbindung</summary>
+            <div class="formGrid twoCols">
+              <label>
+                <span>IBAN</span>
+                <input id="bankIban">
+              </label>
+              <label>
+                <span>BIC</span>
+                <input id="bankBic">
+              </label>
+              <label class="wide">
+                <span data-i18n="bankName">Bank</span>
+                <input id="bankName">
+              </label>
+            </div>
+          </details>
+
+          <details>
+            <summary data-i18n="backup">Backup</summary>
+            <div class="backupPanel">
+              <p data-i18n="backupIntro">Exporteer of importeer alle lokaal opgeslagen gegevens.</p>
+              <div class="actionRow">
+                <button id="exportJson" data-i18n="exportJson">JSON exportieren</button>
+                <label class="fileButton">
+                  <span data-i18n="importJson">JSON importieren</span>
+                  <input id="importJson" type="file" accept="application/json,.json">
+                </label>
+              </div>
+            </div>
+          </details>
+
+          <details>
+            <summary data-i18n="about">Über</summary>
+            <p>Clarity Offertemaker <strong>v3.0dev1</strong></p>
+          </details>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <template id="lineTemplate">
+    <div class="lineEditor">
+      <label class="lineDescription">
+        <span data-i18n="description">Beschreibung</span>
+        <input class="lineDesc" autocomplete="off">
+      </label>
+      <label class="linePriceWrap">
+        <span data-i18n="priceNet">Preis netto</span>
+        <input class="linePrice" type="number" inputmode="decimal" min="0" step="0.01">
+      </label>
+      <button class="iconButton removeLine" aria-label="Löschen">×</button>
+    </div>
+  </template>
+
+  <script src="js/storage.js"></script>
+  <script src="js/locales.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
